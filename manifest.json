@@ -4,7 +4,8 @@
     "version": "1.0",
     "manifest_version": 3,
     "permissions": [
-        "tabs"
+        "tabs",
+        "storage"
     ],
     "action": {
         "default_popup": "index.html",
@@ -16,7 +17,7 @@
                 "<all_urls>"
             ],
             "js": [
-                "content.js"
+                "js/content-script.js"
             ]
         }
     ]
