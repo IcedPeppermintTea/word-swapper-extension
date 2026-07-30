@@ -4,43 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
+    <title>Settings — WordSwapper</title>
+    <link rel="stylesheet" href="css/global-styles.css">
+    <link rel="stylesheet" href="css/settings.css">
 </head>
 
 <body>
-    <h1>Word Swapper Settings</h1>
+    <div class="settings-page">
 
-    <!--Add New Rule-->
-    <section>
-        <h2>Add New Rule:</h2>
+        <header class="settings-header">
+            <h1>Word <span class="gradient-text">Swapper</span> Settings</h1>
+            <p>Manage what gets swapped on every page you visit.</p>
+        </header>
 
-        <div class="new-rule-section">
-            <div class="new-rule-fields">
-                <label>Word to be Swapped:</label>
-                <input type="text" id="given_word" placeholder="word to swap">
-                <label>Word to Swap To:</label>
-                <input type=text id="swap_value" placeholder="swap value">
-            </div>
-            <div class="new-field-options">
-                <div>
-                    <input type="checkbox" id="full-word" name="full-word">
-                    <label for="full-word">Full word only</label>
+        <!-- Add New Rule -->
+        <section class="panel">
+            <h2>Add new rule</h2>
+
+            <div class="new-rule-section">
+                <div class="new-rule-fields">
+                    <div class="field">
+                        <label for="given_word">Word to be swapped</label>
+                        <input type="text" id="given_word" placeholder="e.g. moist">
+                    </div>
+                    <div class="field">
+                        <label for="swap_value">Word to swap to</label>
+                        <input type="text" id="swap_value" placeholder="e.g. damp">
+                    </div>
                 </div>
-                <div>
-                    <input type="checkbox" id="case-sensitive" name="case-sensitive">
-                    <label for="full-word">Case sensitive search</label>
+
+                <div class="new-field-options">
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="full-word">
+                        <span>Full word only</span>
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="case-sensitive">
+                        <span>Case sensitive</span>
+                    </label>
                 </div>
-                
+
+                <button type="button" id="save" class="btn-primary">Save rule</button>
+            </div>
+        </section>
+
+        <!-- Existing Rules -->
+        <section class="panel">
+            <div class="panel-header-row">
+                <h2>Existing rules</h2>
+                <span class="rule-count" id="rule-count">0 rules</span>
             </div>
 
-            <button type="button" id="save">Save</button>
-        </div>
-    </section>
+            <div class="existing-rules-section" id="rules-list">
 
-    <!--Add/Remove New Settings-->
+                <!-- Empty state: show/hide when rules.length === 0 -->
+                <div class="empty-state" id="empty-state">
+                    <p>No rules yet — add one above to get started.</p>
+                </div>
 
+                <!-- Example populated rule for design purposes  -->
+                <div class="rule">
+                    <div class="rule-words">
+                        <span class="rule-word">moist</span>
+                        <span class="swap-glyph" aria-hidden="true"></span>
+                        <span class="rule-word rule-word--to">damp</span>
+                    </div>
+                    <div class="rule-meta">
+                        <span class="rule-badge">Full word</span>
+                        <span class="rule-badge">Aa</span>
+                        <button type="button" class="btn-delete" aria-label="Delete rule">
+                            <svg src="/assets/arrow.svg"></svg>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <script src="js/settings.js"></script>
 </body>
-
-<script src="js/settings.js"></script>
 
 </html>

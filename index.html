@@ -5,11 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WordSwapper</title>
+    <link rel="stylesheet" href="css/global-styles.css">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
-    <H1>WordSwapper</H1>
-    <button type="button" id="settings-btn">Settings</button>
+    <div class="popup">
+        <header class="popup-header">
+            <img src="assets/favicon.png" class="brand-icon" alt="">
+            <h1>WordSwapper</h1>
+        </header>
+        <div class="toggle-row">
+            <span class="toggle-label">Extension Status</span>
+            <button class="toggle-switch" id="toggle-btn" aria-pressed="false">
+            <span class="toggle-thumb"></span>
+            </button>
+        </div>
+        <button type="button" id="settings-btn" class="btn-settings">Settings</button>
+    </div>
 </body>
 
 <script src="js/index.js"></script>
