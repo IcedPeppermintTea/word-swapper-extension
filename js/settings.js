@@ -32,11 +32,22 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                     </div>`;
 
-      console.log(ruleCard);
+      // create a separate listener for each rule to delete via closures
+      const deleteBtn = ruleCard.querySelector(".btn-delete");
+
+      deleteBtn.addEventListener("click", (e) => {
+        deleteRule(rule.id); // captures the rule via closure
+      });
 
       existingRuleSection.appendChild(ruleCard);
-      ruleCard = "";
     });
+  }
+
+  /* function to delete a specific rule by id */
+  function deleteRule(id) {
+    const index = rules.findIndex((rule) => rule.id == id);
+    if (index !== -1) rules.splice(index, 1);
+    renderRules();
   }
 
   saveBtn.addEventListener("click", (e) => {
@@ -52,7 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
       isCaseSensitive: isCaseSensitive,
     };
 
-    /* Display rules in existing rules section */
+    /* If rules exist: display in existing rules section*/
+
     rules.push(newRule);
 
     renderRules();
