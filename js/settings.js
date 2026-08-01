@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  /* Handle new rule saving */
   const givenWord = document.querySelector("#given_word");
   const swapValue = document.querySelector("#swap_value");
   const checkFullWord = document.querySelector("#full-word");
@@ -8,7 +7,15 @@ document.addEventListener("DOMContentLoaded", function () {
   const existingRuleSection = document.querySelector("#rules-list");
   const ruleCount = document.querySelector("#rule-count");
   const emptyStateMsg = document.querySelector("#empty-state");
-  const rules = [];
+  let rules = [];
+  loadRules(); // render existing rules when page is opened
+
+  /* function to load the rules from storage */
+  async function loadRules() {
+    const result = await chrome.storage.sync.get("rules");
+    rules = result.rules || [];
+    renderRules();
+  }
 
   /* function to render all existing rules */
   function renderRules() {
@@ -37,8 +44,8 @@ document.addEventListener("DOMContentLoaded", function () {
       // create a separate listener for each rule to delete via closures
       const deleteBtn = ruleCard.querySelector(".btn-delete");
 
-      deleteBtn.addEventListener("click", (e) => {
-        deleteRule(rule.id); // captures the rule via closure
+      deleteBtn.addEventListener("click", async () => {
+        await deleteRule(rule.id); // captures the rule via closure
       });
 
       existingRuleSection.appendChild(ruleCard);
@@ -55,13 +62,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* function to delete a specific rule by id */
-  function deleteRule(id) {
+  async function deleteRule(id) {
     const index = rules.findIndex((rule) => rule.id == id);
     if (index !== -1) rules.splice(index, 1);
-    renderRules();
+    await chrome.storage.sync.set({ rules }); // update storage version of rules
+    loadRules();
   }
 
-  saveBtn.addEventListener("click", (e) => {
+  /* Handle new rule saving */
+  saveBtn.addEventListener("click", async () => {
     const word = givenWord.value;
     const swap = swapValue.value;
     const isFullWord = checkFullWord.checked;
@@ -77,7 +86,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* If rules exist: display in existing rules section*/
     rules.push(newRule);
-    renderRules();
-    console.log(rules);
+
+    // save new ruleset in storage
+    await chrome.storage.sync.set({ rules }); // object holding the rules array
+
+    // render ruleset in the UI
+    loadRules();
   });
 });
