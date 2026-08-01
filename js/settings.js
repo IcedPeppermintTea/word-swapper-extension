@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const checkCaseSensitive = document.querySelector("#case-sensitive");
   const saveBtn = document.querySelector("#save");
   const existingRuleSection = document.querySelector("#rules-list");
+  const ruleCount = document.querySelector("#rule-count");
+  const emptyStateMsg = document.querySelector("#empty-state");
   const rules = [];
 
   /* function to render all existing rules */
@@ -41,6 +43,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
       existingRuleSection.appendChild(ruleCard);
     });
+
+    ruleCount.textContent = `${rules.length} rules`;
+
+    // display empty state message if rules.length == 0
+    if (rules.length != 0) {
+      emptyStateMsg.classList.add("display-none");
+    } else {
+      emptyStateMsg.classList.remove("display-none");
+    }
   }
 
   /* function to delete a specific rule by id */
@@ -64,9 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     /* If rules exist: display in existing rules section*/
-
     rules.push(newRule);
-
     renderRules();
   });
 });

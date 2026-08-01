@@ -110,3 +110,7 @@ input {
   background-position: center;
   background-size: contain;
 }
+
+.display-none {
+    display: none;
+}
