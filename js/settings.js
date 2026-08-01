@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const isCaseSensitive = checkCaseSensitive.checked;
 
     const newRule = {
+      id: self.crypto.randomUUID(),
       word: word,
       swap: swap,
       isFullWord: isFullWord,
@@ -77,5 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
     /* If rules exist: display in existing rules section*/
     rules.push(newRule);
     renderRules();
+    console.log(rules);
   });
 });
