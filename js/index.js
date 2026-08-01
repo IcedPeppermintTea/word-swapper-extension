@@ -1,14 +1,12 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+  /* Redirect user to settings page when they click on 'settings */
+  const settingsBtn = document.querySelector("#settings-btn");
 
-    /* Variables */
-    const settingsBtn = document.querySelector('#settings-btn');
+  settingsBtn.addEventListener("click", (e) => {
+    chrome.tabs.create({
+      url: "settings.html",
+    });
+  });
 
-    /* Settings button functionality */
-
-    settingsBtn.addEventListener("click", e => {
-        chrome.tabs.create({
-            url: "settings.html"
-        })
-    })
-
+  /* Enable / Disable button functionality */
 });
