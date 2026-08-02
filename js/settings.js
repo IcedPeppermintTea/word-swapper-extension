@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const swapValue = document.querySelector("#swap_value");
   const checkFullWord = document.querySelector("#full-word");
   const checkCaseSensitive = document.querySelector("#case-sensitive");
-  const saveBtn = document.querySelector("#save");
+  const ruleForm = document.querySelector("#rule-form");
   const existingRuleSection = document.querySelector("#rules-list");
   const ruleCount = document.querySelector("#rule-count");
   const emptyStateMsg = document.querySelector("#empty-state");
@@ -70,7 +70,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* Handle new rule saving */
-  saveBtn.addEventListener("click", async () => {
+  ruleForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
     const word = givenWord.value;
     const swap = swapValue.value;
     const isFullWord = checkFullWord.checked;
