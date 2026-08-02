@@ -92,6 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
     await chrome.storage.sync.set({ rules }); // object holding the rules array
 
     // render ruleset in the UI
+    givenWord.value = "";
+    swapValue.value = "";
     loadRules();
   });
 });
