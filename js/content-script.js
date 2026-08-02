@@ -5,6 +5,13 @@
 
 /* initial state function: read the rules from storage */
 async function init() {
+  // check enablement flag status
+  const toggleResult = await chrome.storage.sync.get("enabled");
+
+  if (toggleResult.enabled === false) {
+    return;
+  }
+
   const result = await chrome.storage.sync.get("rules");
   const rules = result.rules || [];
 
@@ -23,13 +30,13 @@ async function init() {
     {
       // filter and skip tags
       acceptNode(node) {
-        const parentTag = node.parentElement?.TagName;
+        const parentTag = node.parentElement?.tagName;
         const skipTags = ["SCRIPT", "STYLE", "TEXTAREA", "INPUT", "NOSCRIPT"];
 
         if (parentTag && skipTags.includes(parentTag)) {
           return NodeFilter.FILTER_REJECT;
         }
-        return NodeFilter;
+        return NodeFilter.FILTER_ACCEPT;
       },
     },
   );
