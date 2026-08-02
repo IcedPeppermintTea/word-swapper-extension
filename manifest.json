@@ -7,6 +7,11 @@
         "tabs",
         "storage"
     ],
+    "icons": {
+    "16": "assets/favicon.png",
+    "48": "assets/favicon.png",
+    "128": "assets/favicon.png"
+    },
     "action": {
         "default_popup": "index.html",
         "default_icon": "assets/favicon.png"
